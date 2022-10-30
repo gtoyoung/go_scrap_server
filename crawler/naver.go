@@ -95,6 +95,10 @@ Loop:
 	return true
 }
 
+func GetNewData(date string) []data.ResponseMsg {
+	return database.GetNews(date)
+}
+
 func findMainLink(s []string, str string) bool {
 	for _, v := range s {
 		if v == str {

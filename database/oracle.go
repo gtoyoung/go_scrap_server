@@ -58,7 +58,42 @@ func InsertDB(sportsNews []data.SportsNews) {
 		if err != nil {
 			panic(err)
 		}
+
 		fmt.Println("Data Insert Success!")
 	}
 	fmt.Println("삽입 완료")
+}
+
+func GetNews(date string) []data.ResponseMsg {
+	db := initDB()
+
+	var sportsNews []data.ResponseMsg
+	query := "SELECT title, image, link FROM TB_SPORT_NEWS"
+
+	if len(date) > 0 {
+		query += " WHERE TO_CHAR(new_dtm, 'YYYYMMDD') = " + date
+	}
+	rows, err := db.Query(query)
+	if err != nil {
+		panic(err)
+	}
+
+	defer rows.Close()
+
+	for rows.Next() {
+		var title string
+		var image string
+		var link string
+
+		err = rows.Scan(&title, &image, &link)
+
+		sportsNews = append(sportsNews, data.ResponseMsg{Link: link, Image: image, Title: title})
+	}
+
+	err = rows.Err()
+	if err != nil {
+		panic(err)
+	}
+
+	return sportsNews
 }
