@@ -10,6 +10,7 @@ import (
 )
 
 func main() {
+	//crawler.Crawler("")
 	// 고루틴 동시 실행
 	// 스케쥴러 실행
 	startScheduler()
@@ -19,9 +20,22 @@ func main() {
 
 func startScheduler() {
 	fmt.Println("스케줄 시작합니다.")
-	gocron.Every(1).Day().At("18:00").Do(func() {
+
+	gocron.Every(1).Day().At("08:00").Do(func() {
 		fmt.Println(time.Now())
-		fmt.Println("파싱작업 스케줄 진행")
+		fmt.Println("오전 파싱작업 스케줄 진행")
+		crawler.Crawler("")
+	})
+
+	gocron.Every(1).Day().At("12:00").Do(func() {
+		fmt.Println(time.Now())
+		fmt.Println("점심 파싱작업 스케줄 진행")
+		crawler.Crawler("")
+	})
+
+	gocron.Every(1).Day().At("23:50").Do(func() {
+		fmt.Println(time.Now())
+		fmt.Println("저녁 파싱작업 스케줄 진행")
 		crawler.Crawler("")
 	})
 

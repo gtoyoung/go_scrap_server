@@ -44,6 +44,11 @@ func InsertDB(sportsNews []data.SportsNews) {
 	db := initDB()
 	var sequence int
 
+	fmt.Println("오늘날짜 데이터 삭제진행..")
+	// 오늘날짜에 대한 정보 제거
+	db.Exec("DELETE FROM TB_SPORT_NEWS where TO_CHAR(REGIST_DATE, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD') ")
+	fmt.Println("오늘날짜 데이터 삭제완료")
+
 	fmt.Println("데이터 삽입중")
 	for _, news := range sportsNews {
 		// 시퀀스 값 지정
