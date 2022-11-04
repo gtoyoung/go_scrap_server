@@ -13,7 +13,7 @@ import (
 func Crawler(date string) bool {
 	url := "https://sports.news.naver.com/wfootball/news/index?isphoto=N"
 	if len(date) > 0 {
-		url += "&date="
+		url += "&date=" + date
 	}
 
 	// 옵션 브라우저 창 띄우지 않고 진행

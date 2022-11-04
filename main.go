@@ -33,7 +33,7 @@ func startScheduler() {
 		crawler.Crawler("")
 	})
 
-	gocron.Every(1).Day().At("23:50").Do(func() {
+	gocron.Every(1).Day().At("21:00").Do(func() {
 		fmt.Println(time.Now())
 		fmt.Println("저녁 파싱작업 스케줄 진행")
 		crawler.Crawler("")
